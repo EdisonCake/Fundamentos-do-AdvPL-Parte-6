@@ -1,3 +1,9 @@
+/* 4 – Você acabou de mudar a legenda no browse dos
+pedidos de venda, agora, utilizando outro PE,
+altere as imagens da janela onde é possível
+identificar o que cada legenda representa. Deve
+ficar desse jeito: */
+
 #INCLUDE 'PROTHEUS.CH'
 
 User Function MA410LEG()

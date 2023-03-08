@@ -11,15 +11,13 @@ bloqueado (B1_MSBLQL = 1). */
 
 #INCLUDE 'TOTVS.CH'
 
-User Function MT010INC()
-    Local aArea     := GetArea()
-    Local aAreaSB1  := SB1->(GetArea())
-    Local lRetorno  := .F.
+User Function MT010CAN()
+    local nOpc := PARAMIXB[1]
 
-    if ExistBlock('AddCad')
-        lRetorno := ExecBlock('AddCad', .F., .F.)
+    if (INCLUI .or. ALTERA) .and. nOpc == 1
+        if ExistBlock('AddCad')
+            ExecBlock('AddCad', .F., .F.)
+        endif
     endif
 
-    RestArea(aArea)
-    RestArea(aAreaSB1)
-Return lRetorno
+Return 

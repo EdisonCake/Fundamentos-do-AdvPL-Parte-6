@@ -1,3 +1,12 @@
+/* 3 – Utilize um Ponto de Entrada para alterar as
+legendas da rotina “Pedidos de Venda”.
+As legendas devem utilizar as seguintes imagens:
+o Pedido em aberto: “CHECKOK”
+o Pedido encerrado: “BR_CANCEL”
+o Pedido Liberado: “GCTPIMSE”
+Após a alteração o browse dos pedidos de venda
+devem ficar da seguinte forma: */
+
 #INCLUDE 'TOTVS.CH'
 
 User Function MA410COR()

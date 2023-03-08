@@ -8,8 +8,8 @@ User Function AddCad()
      
     RecLock("SB1", .F.)
 
-    SB1->B1_DESC := 'Cad. Manual - ' + M->B1_DESC   // A descrição do produto tem adicionado um "Cad. Manual".
-    SB1->B1_MSBLQL := "1"                           // O cadastro é automaticamente bloqueado/inativado após o cadastro.
+    SB1->B1_DESC := "Cad. Manual - " + alltrim(SB1->B1_DESC)   // A descrição do produto tem adicionado um "Cad. Manual".
+    SB1->B1_MSBLQL := "1"                                      // O cadastro é automaticamente bloqueado/inativado após o cadastro.
     
     SB1->(MsUnlock())
     RestArea(aArea)
@@ -61,24 +61,29 @@ User Function mBrowSB1()
 
 Return
 
-// Rotina para validação de cadastro de municípios.
+// Rotina para validação de cadastro de municípios através de uma consulta SQL.
 User Function CadMun()
+    // Declaração de variáveis.
     local aArea := GetArea()
     local cAlias := GetNextAlias()
     local cQuery := ""
     local nCount := 0
     local lValido := .T.
 
+    // Aqui é passada a pesquisa no banco de dados com base na UF e Município recém inseridos pelo usuário na tela do Protheus.
     cQuery := "SELECT CC2_EST, CC2_CODMUN, CC2_MUN FROM " + RetSqlName("CC2") + " WHERE CC2_EST = '" + M->CC2_EST  + "' AND CC2_MUN = '" + alltrim(M->CC2_MUN) + "'"
     
+    // Aqui é feita a pesquisa no banco de dados.
     TCQUERY cQuery ALIAS &(cAlias) NEW
     &(cAlias)->(DBGOTOP())
 
+    // Enquanto o ponteiro não chegar no final da tabela, é acrescido um contador.
     While &(cAlias)->(!EOF())
         nCount++
         &(cAlias)->(DBSKIP())
     end
 
+    // Se o contador for maior que 1, existe um ou mais municípios com o mesmo nome cadastrado na UF mencionada anteriormente.
     if nCount > 1
         MSGStop("O município já existe!")
         lValido := .F.

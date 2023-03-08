@@ -1,3 +1,5 @@
+/* 8 – Implementar a mesma rotina do Exercício 1. */
+
 #Include 'PROTHEUS.CH'
 
 User Function Item()
